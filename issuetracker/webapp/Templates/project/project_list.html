@@ -12,32 +12,38 @@
 
     <h1 style="color: #999; text-align: center">Трекер задач</h1>
     <div class="d-grid gap-2">
-        <a href="{% url 'webapp:project_create' %}" class="btn btn-primary">Создать проект</a>
+        {% if request.user.is_authenticated %}
+            <div class="nav-item">
+                <a href="{% url 'webapp:project_create' %}" class="btn btn-primary w-100">Создать проект</a>
+            </div>
+        {% endif %}
     </div>
     <div class="container mt-5">
-    <div class="row">
-        {% for project in projects %}
-        <div class="col-12 mb-4">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h1>{{ project.title }}</h1>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">{{ project.description|truncatewords:30 }}</p>
-                </div>
-                    <div    >
-                        <a href="{% url 'webapp:project_detail' project.id %}" class="btn btn-primary mt-4">Подробнее</a>
-                        <a href="{% url 'webapp:project_delete' project.id %}" class="btn btn-danger mt-4">Удалить</a>
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-12 mb-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h1>{{ project.title }}</h1>
                     </div>
-                <div class="card-footer text-muted mt-2">
-                    Создан: {{ project.start_data }}<br>
-                    Завершение: {{ project.end_data|default:'Не задано' }}
+                    <div class="card-body">
+                        <p class="card-text">{{ project.description|truncatewords:30 }}</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'webapp:project_detail' project.id %}" class="btn btn-primary mx-2">Подробнее</a>
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'webapp:project_delete' project.id %}" class="btn btn-danger mx-2">Удалить</a>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-muted mt-2">
+                        Создан: {{ project.start_data }}<br>
+                        Завершение: {{ project.end_data|default:'Не задано' }}
+                    </div>
                 </div>
             </div>
+            {% empty %}
+            <p>Проекты не найдены.</p>
+            {% endfor %}
         </div>
-        {% empty %}
-        <p>Проекты не найдены.</p>
-        {% endfor %}
     </div>
-</div>
 {% endblock %}
