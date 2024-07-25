@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
@@ -15,7 +16,7 @@ class IssueDetailView(DetailView):
         context['project'] = get_object_or_404(Project, id=issue.project.id)
         return context
 
-class IssueCreateView(CreateView):
+class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     template_name = "issue/issue_create.html"
     form_class = IssueForm
@@ -25,20 +26,20 @@ class IssueCreateView(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse('webapp:project_detail', kwargs={'pk': self.kwargs['pk']})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['project'] = Project.objects.get(pk=self.kwargs['pk'])
         return context
 
-class IssueUpdateView(UpdateView):
+class IssueUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "issue/issue_update.html"
     form_class = IssueForm
     model = Issue
 
     def get_success_url(self):
-        return reverse("issue_detail", kwargs={"pk": self.object.pk})
+        return reverse("webapp:issue_detail", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -46,12 +47,12 @@ class IssueUpdateView(UpdateView):
         context['project'] = get_object_or_404(Project, id=issue.project.id)
         return context
 
-class IssueDeleteView(DeleteView):
+class IssueDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "issue/issue_delete.html"
     model = Issue
 
     def get_success_url(self):
-        return reverse("project_detail", kwargs={"pk": self.object.project.pk})
+        return reverse("webapp:project_detail", kwargs={"pk": self.object.project.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
