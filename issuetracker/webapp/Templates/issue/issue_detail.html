@@ -14,11 +14,15 @@
                 <p><strong>Дата создания:</strong> {{ issue.created_at }}</p>
                 <p><strong>Статус:</strong> {{ issue.status }}</p>
                 <p><strong>Тип задачи:</strong> {{ issue.type }}</p>
-                <div class="d-grid gap-2">
-                    <a href="{% url 'webapp:issue_update' issue.pk %}" class="btn btn-info">Редактировать задачу</a>
-                    <a href="{% url 'webapp:issue_delete' issue.pk%}" class="btn btn-danger">Удалить задачу</a>
-                    <a href="{% url 'webapp:project_detail' project.id %}" class="btn btn-secondary d-block">Назад</a>
-                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'webapp:issue_update' issue.pk %}" class="btn btn-info">Редактировать задачу</a>
+                        <a href="{% url 'webapp:issue_delete' issue.pk %}" class="btn btn-danger">Удалить задачу</a>
+                    </div>
+                {% endif %}
+
+                <a href="{% url 'webapp:project_detail' project.id %}" class="btn btn-secondary d-block">Назад</a>
             </div>
         </div>
     </div>
