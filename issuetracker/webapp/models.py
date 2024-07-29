@@ -1,5 +1,7 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Status(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -26,6 +28,15 @@ class Project(models.Model):
     end_data = models.DateField(null=True, blank=True)
     title = models.CharField(max_length=50, verbose_name='Название', null=False, blank=False)
     description = models.TextField(max_length=2000, verbose_name='Описание')
+    users = models.ManyToManyField(User, related_name='projects')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Проект"
+        verbose_name_plural = "Проекты"
+
 
 class Issue(models.Model):
     summary = models.CharField(max_length=50, verbose_name="Заголовок", unique=True, null=False, blank=False)
