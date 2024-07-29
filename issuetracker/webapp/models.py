@@ -29,6 +29,13 @@ class Project(models.Model):
     title = models.CharField(max_length=50, verbose_name='Название', null=False, blank=False)
     description = models.TextField(max_length=2000, verbose_name='Описание')
     users = models.ManyToManyField(User, related_name='projects')
+    creator = models.ForeignKey(User, related_name='created_projects', on_delete=models.SET_NULL, null=True, blank=True)
+
+    manager = models.ForeignKey(User, related_name='managed_projects', on_delete=models.SET_NULL, null=True, blank=True)
+    team_lead = models.ForeignKey(User, related_name='team_led_projects', on_delete=models.SET_NULL, null=True,
+                                  blank=True)
+    developers = models.ManyToManyField(User, related_name='developed_projects', blank=True)
+
 
     def __str__(self):
         return self.title
