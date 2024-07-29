@@ -1,11 +1,17 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.utils.http import urlencode
+from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from webapp.forms import ProjectForm, SearchForm
 from webapp.models import Project, Issue
+
+User = get_user_model()
 
 class ProjectListView(ListView):
     model = Project
@@ -51,6 +57,8 @@ class ProjectDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["issues"] = Issue.objects.filter(project=self.object)
+        context["can_edit"] = self.request.user.has_perm('webapp.change_project') or self.request.user == self.object.creator
+        context["can_delete"] = self.request.user.has_perm('webapp.delete_project') or self.request.user == self.object.creator
         return context
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):

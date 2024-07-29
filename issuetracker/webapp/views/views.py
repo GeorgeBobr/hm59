@@ -8,13 +8,13 @@ from webapp.models import Issue, Project
 class IssueDetailView(DetailView):
     template_name = "issue/issue_detail.html"
     model = Issue
-    context_object_name = "issue"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        issue = self.get_object()
-        context['project'] = get_object_or_404(Project, id=issue.project.id)
+        context["can_edit"] = self.request.user.has_perm('webapp.change_issue')
+        context["can_delete"] = self.request.user.has_perm('webapp.delete_issue')
         return context
+
 
 class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
