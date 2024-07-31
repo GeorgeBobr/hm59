@@ -1,0 +1,206 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Менеджер проекта (Project Manager)",
+    "permissions": [
+      [
+        "add_user",
+        "auth",
+        "user"
+      ],
+      [
+        "delete_user",
+        "auth",
+        "user"
+      ],
+      [
+        "add_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "change_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "delete_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "add_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "change_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "delete_project",
+        "webapp",
+        "project"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "Капитан (Team Lead)",
+    "permissions": [
+      [
+        "add_user",
+        "auth",
+        "user"
+      ],
+      [
+        "delete_user",
+        "auth",
+        "user"
+      ],
+      [
+        "add_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "change_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "delete_issue",
+        "webapp",
+        "issue"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "Разработчик (Developer)",
+    "permissions": [
+      [
+        "add_issue",
+        "webapp",
+        "issue"
+      ],
+      [
+        "change_issue",
+        "webapp",
+        "issue"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$YPdh5sDJdNQteZOKN4AERm$zlQIC+ksJsI+XWqUk9jQoNXpIDvxDEtatQQDxIqex8g=",
+    "last_login": "2024-07-29T12:35:49.737Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-07-21T18:29:13.880Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$3akA3MBo1FRC5tOVJl9i6K$MkwZkNzZ5DUjdJ4eryVs340zhAmAszSKbr7C7dwzNSQ=",
+    "last_login": "2024-07-29T12:36:13.303Z",
+    "is_superuser": false,
+    "username": "Huesos",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-07-25T08:18:30Z",
+    "groups": [
+      [
+        "Разработчик (Developer)"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$6P8qsIbacj5fWiusBsPrCZ$XdGrzaVODtcrdzz4QslOHv/jfttP7eGCY5jStNee04k=",
+    "last_login": "2024-07-29T12:26:38.436Z",
+    "is_superuser": false,
+    "username": "Pidrila",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-07-25T08:18:51Z",
+    "groups": [
+      [
+        "Капитан (Team Lead)"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$ALYmH08ECHsoa1hrJYTEPG$7ZE8cIjqPU/Wf5aGF+LJiVS3lcXfqOs48SpVfBi57FY=",
+    "last_login": "2024-07-29T12:31:28.713Z",
+    "is_superuser": false,
+    "username": "Pizdaliz",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-07-25T08:19:02Z",
+    "groups": [
+      [
+        "Менеджер проекта (Project Manager)"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$njVvOqjmQaXTHRXQmeMaaW$m4W2ECWeszYqGnpoVFmNsd79kDJPouNygD0ewez7NCA=",
+    "last_login": "2024-07-29T11:47:30.989Z",
+    "is_superuser": false,
+    "username": "NIGGER",
+    "first_name": "Pol",
+    "last_name": "Pot",
+    "email": "pid@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-07-29T11:47:30.685Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
