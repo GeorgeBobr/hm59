@@ -31,11 +31,6 @@ class Project(models.Model):
     users = models.ManyToManyField(User, related_name='projects')
     creator = models.ForeignKey(User, related_name='created_projects', on_delete=models.SET_NULL, null=True, blank=True)
 
-    manager = models.ForeignKey(User, related_name='managed_projects', on_delete=models.SET_NULL, null=True, blank=True)
-    team_lead = models.ForeignKey(User, related_name='team_led_projects', on_delete=models.SET_NULL, null=True,
-                                  blank=True)
-    developers = models.ManyToManyField(User, related_name='developed_projects', blank=True)
-
 
     def __str__(self):
         return self.title
